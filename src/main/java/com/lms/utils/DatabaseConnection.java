@@ -21,7 +21,7 @@ public class DatabaseConnection {
 	        if (conn == null || conn.isClosed()) {  // 🔥 Check if closed
 	            Class.forName("oracle.jdbc.driver.OracleDriver");
 	            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-	            System.out.println("✅ Database Connected Successfully!");
+//	            System.out.println("✅ Database Connected Successfully!");
 	        }
 	    } catch (ClassNotFoundException | SQLException e) {
 	        e.printStackTrace();

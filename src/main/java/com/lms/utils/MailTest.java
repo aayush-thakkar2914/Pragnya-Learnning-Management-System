@@ -13,9 +13,9 @@ import jakarta.mail.internet.MimeMessage;
 
 public class MailTest {
 	public static void main(String[] args) {
-        final String senderEmail = "beunique606@gmail.com";  
-        final String senderPassword = "your-16-character-app-password"; 
-        final String recipientEmail = "testuser@gmail.com";  
+        final String senderEmail = "pragnya.lms@gmail.com";  
+        final String senderPassword = "hnsazrxstlgimyql"; 
+        final String recipientEmail = "aayusht2004@gmail.com";  
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

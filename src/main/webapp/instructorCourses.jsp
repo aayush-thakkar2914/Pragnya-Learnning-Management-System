@@ -1,14 +1,32 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.lms.models.Course"%>
+<%@ page import="com.lms.models.User"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+HttpSession userSession = request.getSession(false);
+if (userSession == null || userSession.getAttribute("user") == null) {
+	response.sendRedirect("login.jsp");
+	return;
+}
+User user = (User) userSession.getAttribute("user");
+if (!"INSTRUCTOR".equals(user.getRole())) {
+	response.sendRedirect("student_dashboard.jsp");
+	return;
+}
+
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+response.setHeader("Pragma", "no-cache");
+response.setHeader("Expires", "0");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Courses</title>
+<link rel="icon" href="images/favicon.png" type="image/png"> 
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 .popup {

@@ -25,7 +25,7 @@
         <div
             class="w-full md:w-1/2 flex flex-col justify-center text-gray-800 text-left px-8 pt-8 md:pt-0">
             <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
-                Welcome to <span class="text-gray-900">PRAGNYA Online Course
+                Welcome to <span class="text-gray-900">PRAGNYA Learning
                     Management System</span>
             </h1>
             <p class="mt-4 text-lg md:text-xl leading-relaxed">Manage your

@@ -6,15 +6,11 @@ import com.lms.utils.DatabaseConnection;
 import java.sql.*;
 
 public class UserDAO {
-
-
-
     
-
     public boolean registerUser(User user) {
         String query = "INSERT INTO users (name, email, password, role, created_at) VALUES (?, ?, ?, ?, SYSDATE)";
-        try (	Connection conn = DatabaseConnection.getConnection();
-        		PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
@@ -28,8 +24,8 @@ public class UserDAO {
 
     public User getUserByEmail(String email) {
         String query = "SELECT * FROM users WHERE email = ?";
-        try (	Connection conn = DatabaseConnection.getConnection(); // Added to check the DB Connection
-        		PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -47,7 +43,8 @@ public class UserDAO {
         }
         return null;
     }
- // Check if email exists
+    
+    // Check if email exists
     public boolean isEmailExists(String email) {
         boolean exists = false;
         String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
@@ -72,36 +69,18 @@ public class UserDAO {
         return exists;
     }
 
- // Save reset token
-//    public boolean saveResetToken(String email, String token) {
-//        String sql = "UPDATE users SET reset_token = ? WHERE email = ?";
-//        
-//        try (Connection conn = DatabaseConnection.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(sql)) {
-//            
-//            stmt.setString(1, token);
-//            stmt.setString(2, email);
-//
-//            int rowsUpdated = stmt.executeUpdate();
-//            return rowsUpdated > 0; // ✅ Return true if at least one row is updated
-//            
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return false; // ✅ Return false if there was an error
-//        }
-//    }
     public boolean saveResetToken(String email, String token) {
-        String sql = "UPDATE users SET reset_token = ? WHERE email = ?";
+        String sql = "UPDATE users SET reset_token = ?, reset_token_expiry = SYSDATE + (1/24) WHERE email = ?";
         boolean isUpdated = false;
 
-        try (Connection conn = DatabaseConnection.getConnection(); // 🔥 Fresh connection
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, token);
             pstmt.setString(2, email);
             int rowsAffected = pstmt.executeUpdate();
 
-            isUpdated = rowsAffected > 0;  // ✅ Check if update was successful
+            isUpdated = rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("❌ Error saving reset token!");
@@ -110,12 +89,12 @@ public class UserDAO {
         return isUpdated;
     }
 
-
-
-    // Get user by reset token
+    // Get user by reset token with expiration check
     public String getUserByToken(String token) {
+        String sql = "SELECT email FROM users WHERE reset_token = ? AND reset_token_expiry > SYSDATE";
+        
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT email FROM users WHERE reset_token = ?")) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, token);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -126,15 +105,35 @@ public class UserDAO {
         }
         return null;
     }
-    // Update password
-    public void updatePassword(String email, String hashedPassword) {
+    
+    // Update password with return value
+    public boolean updatePassword(String email, String hashedPassword) {
+        String sql = "UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE email = ?";
+        
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("UPDATE users SET password = ?, reset_token = NULL WHERE email = ?")) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, hashedPassword);
             stmt.setString(2, email);
-            stmt.executeUpdate();
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0; // Return success status
         } catch (Exception e) {
             e.printStackTrace();
+            return false; // Return failure on exception
+        }
+    }
+    
+    // Invalidate token explicitly
+    public boolean invalidateToken(String token) {
+        String sql = "UPDATE users SET reset_token = NULL, reset_token_expiry = NULL WHERE reset_token = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, token);
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0; // Return success status
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Return failure on exception
         }
     }
 }

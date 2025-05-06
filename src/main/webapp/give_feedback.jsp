@@ -23,6 +23,7 @@ int courseId = Integer.parseInt(courseIdstr);
 <head>
     <meta charset="UTF-8">
     <title>Give Feedback</title>
+    <link rel="icon" href="images/favicon.png" type="image/png"> 
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>

@@ -5,6 +5,7 @@
 <head>
     <title>Course Materials</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="images/favicon.png" type="image/png"> 
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto p-6">
