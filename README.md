@@ -80,3 +80,12 @@ Import `LMSproject.sql` into your Oracle SQL Developer to create the schema.
 
 ![image](https://github.com/user-attachments/assets/a663641d-09d1-405c-84fd-7fcc654a3e25)
 
+![image](https://github.com/user-attachments/assets/46840b20-5908-4654-860d-85c89528a7e6)
+
+![image](https://github.com/user-attachments/assets/eda0b8b2-eb39-4fd5-8aab-65cc5ae495df)
+
+![image](https://github.com/user-attachments/assets/ca7e2584-008c-4691-ba82-141cbbbf19a3)
+
+
+
+
