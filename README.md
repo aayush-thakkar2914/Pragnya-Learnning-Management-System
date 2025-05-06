@@ -51,5 +51,32 @@ Import `LMSproject.sql` into your Oracle SQL Developer to create the schema.
 ## 🚀 How to Run
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/Pragnya-LMS.git
+   
+  gh repo clone aayush-thakkar2914/Pragnya-Learnning-Management-System
+
+2.  Import it into Eclipse IDE as a Maven Project.
+
+3. Set up Oracle Database and import LMSproject.sql.
+
+4. Configure database credentials in DatabaseConnection.java.
+
+5. Deploy to a server like Apache Tomcat.
+
+6. Run the project on the server.
+
+📸 Screenshots
+
+![image](https://github.com/user-attachments/assets/953da12e-5f62-4226-a3ca-6402d89f34c4)
+
+![image](https://github.com/user-attachments/assets/5a9c40a7-7b2e-4e27-8b47-6b7ba6ccb60b)
+
+![image](https://github.com/user-attachments/assets/00bc90ae-b793-41e7-b43d-998cb3d6637f)
+
+![image](https://github.com/user-attachments/assets/3fa2a204-3737-443c-abc4-a8f5e4c45b8b)
+
+![image](https://github.com/user-attachments/assets/2513ff4f-4a72-4fbe-b791-0e3fa1420c14)
+
+![image](https://github.com/user-attachments/assets/dd20e765-9fc5-4e69-8a2d-cb1e39c0cad9)
+
+![image](https://github.com/user-attachments/assets/a663641d-09d1-405c-84fd-7fcc654a3e25)
+
