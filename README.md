@@ -56,13 +56,15 @@ Import `LMSproject.sql` into your Oracle SQL Developer to create the schema.
 
 2.  Import it into Eclipse IDE as a Maven Project.
 
-3. Set up Oracle Database and import LMSproject.sql.
+3. Add your email address and app password in EmailUtil.java file.  
 
-4. Configure database credentials in DatabaseConnection.java.
+4. Set up Oracle Database and import LMSproject.sql.
 
-5. Deploy to a server like Apache Tomcat.
+5. Configure database credentials in DatabaseConnection.java.
 
-6. Run the project on the server.
+6. Deploy to a server like Apache Tomcat.
+
+7. Run the project on the server.
 
 📸 Screenshots
 
