@@ -13,8 +13,8 @@ import jakarta.mail.internet.MimeMessage;
 public class EmailUtil {
     
     public static boolean sendEmail(String to, String subject, String body) {
-        final String fromEmail = "pragnya.lms@gmail.com"; 
-        final String password = "hnsazrxstlgimyql"; 
+        final String fromEmail = "your_email_address"; 
+        final String password = "your_app_password"; 
 
         // 1️⃣ Set Mail Server Properties
         Properties props = new Properties();
